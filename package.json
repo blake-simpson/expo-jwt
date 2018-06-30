@@ -1,6 +1,6 @@
 {
   "name": "expo-jwt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Geberate and decode JWT inside of an React Native Expo app",
   "main": "dist/index.js",
   "author": "Blake Simpson <blake.simpson@kartenmacherei.de>",
@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/BlakeSimpson/expo-jwt.git"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "crypto-js": "^3.1.9-1"
   },
