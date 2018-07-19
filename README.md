@@ -1,4 +1,4 @@
-# expo-jwt [![Build Status](https://travis-ci.org/BlakeSimpson/expo-jwt.svg?branch=master)](https://travis-ci.org/BlakeSimpson/expo-jwt)
+# expo-jwt [![Build Status](https://travis-ci.org/kartenmacherei/expo-jwt.svg?branch=master)](https://travis-ci.org/kartenmacherei/expo-jwt)
 
 A library for encoding or decoding JSON Web Tokens (JWT) in an Expo based React
 Native project.
