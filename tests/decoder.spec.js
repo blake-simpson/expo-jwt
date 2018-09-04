@@ -22,7 +22,7 @@ describe('Decoder', () => {
       });
 
       it('throws InvalidHeader if the header cannot be parsed', () => {
-        const token = 'eyJhbGciOiJmLCJ0eXAiOiJKV1QifQ==.eyJmb28iOiJiYXIifQ==.';
+        const token = 'eyJhbGciOiJmLCJ0eXAiOiJKV1QifQ.eyJmb28iOiJiYXIifQ.';
 
         expect(() => {
           decoder.decodeAndVerify(token);
@@ -30,7 +30,7 @@ describe('Decoder', () => {
       });
 
       it('throws InvalidBody if the body cannot be parsed', () => {
-        const token = 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0=.eyJmb28iOiAiYmF9.';
+        const token = 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJmb28iOiAiYmF9.';
 
         expect(() => {
           decoder.decodeAndVerify(token);
@@ -38,7 +38,7 @@ describe('Decoder', () => {
       });
 
       it('throws AlgorithmMissing if "alg" is missing from the header', () => {
-        const token = 'eyJ0eXAiOiJKV1QifQ==.eyJmb28iOiJiYXIifQ==.';
+        const token = 'eyJ0eXAiOiJKV1QifQ.eyJmb28iOiJiYXIifQ.';
 
         expect(() => {
           decoder.decodeAndVerify(token);
@@ -46,8 +46,7 @@ describe('Decoder', () => {
       });
 
       it('throws AlgorithmNotSupported if "alg" is not supported', () => {
-        const token =
-          'eyJhbGciOiJmb28iLCJ0eXAiOiJKV1QifQ==.eyJmb28iOiJiYXIifQ==.';
+        const token = 'eyJhbGciOiJmb28iLCJ0eXAiOiJKV1QifQ.eyJmb28iOiJiYXIifQ.';
 
         expect(() => {
           decoder.decodeAndVerify(token);

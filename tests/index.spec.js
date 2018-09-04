@@ -3,13 +3,13 @@ import JWT from '../lib';
 const key = 'shh';
 
 export const expectedTokens = {
-  none: 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0=.eyJmb28iOiJiYXIifQ==.',
+  none: 'eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJmb28iOiJiYXIifQ.',
   HS256:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ==.MwMPn+JotG0ADbVQz8KgAXQkwT4Dd37499WucrGC6M4=',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.YVoZ0LkWCMCnwEf7Nju2SJt_9mseJP1Q3RvCz4frGwM',
   HS384:
-    'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ==.ythJt3pdoNd1Wq5LMFwvA/G5JlIeyqd73hVrUj5+WrmSBHi8Eeu5X1G/NunE3FGR',
+    'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.VO9qxNYriOfR6DfkvtBFIQydweEj7nmd6YUixV_TSzUSm7OXR_dDmVIfdHtHVmuo',
   HS512:
-    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ==.mdsKdpOymFm2IqXTTtS1JLA/9XM1c/Cjo9IwZoRlFd8MshIjp/RifniPlz9Nq5LCVwa8xIFeKYeNu0pvNJl4JQ=='
+    'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.Kyojwz8Z5SckLbMU-EImuzHEjjg_1apSOLz_tsZQj1025OH--qaORzkHUkScScd8-RZnWUdCu0epiaofQZNkBA'
 };
 
 describe('JWT', () => {
