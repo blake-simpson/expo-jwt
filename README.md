@@ -3,15 +3,15 @@
 A library for encoding or decoding JSON Web Tokens (JWT) in an Expo based React
 Native project.
 
-In an Expo project the JavaScript environment is not node so specific objects
+In an Expo project the JavaScript environment is not node.js so specific objects
 such as `Stream` are not available, rendering many of the popular node-based JWT
 libraries on NPM unusable with Expo.
 
-Additionally, unless the Expo project is "ejected" there is no access to the
+Additionally unless the Expo project is "ejected" there is no access to the
 iOS/Android native code as other React Native specific JWT libraries have done.
 
 This library implements HMAC-SHA signing for JWT by using Crypto.JS in pure
-JavaScript so it can be used inside of Expo.
+JavaScript so it can be used inside of an Expo project.
 
 ## Supported Algorithms
 
@@ -28,7 +28,7 @@ JavaScript so it can be used inside of Expo.
 ## Installation
 
 ```bash
-npm install expo-jwt
+npm install --save expo-jwt
 ```
 
 or
@@ -47,13 +47,13 @@ import JWT from 'expo-jwt';
 const key = 'shh';
 
 JWT.encode({ foo: 'bar' }, key);
-// => eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ==.MwMPn+JotG0ADbVQz8KgAXQkwT4Dd37499WucrGC6M4=
+// => eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.YVoZ0LkWCMCnwEf7Nju2SJt_9mseJP1Q3RvCz4frGwM
 
 JWT.encode({ foo: 'bar' }, key, { algorithm: 'HS512' });
-// => eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ==.mdsKdpOymFm2IqXTTtS1JLA/9XM1c/Cjo9IwZoRlFd8MshIjp/RifniPlz9Nq5LCVwa8xIFeKYeNu0pvNJl4JQ==
+// => eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.Kyojwz8Z5SckLbMU-EImuzHEjjg_1apSOLz_tsZQj1025OH--qaORzkHUkScScd8-RZnWUdCu0epiaofQZNkBA
 
 JWT.encode({ foo: 'bar' }, key, { algorithm: 'none' });
-// => eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0=.eyJmb28iOiJiYXIifQ==.
+// => eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJmb28iOiJiYXIifQ.
 ```
 
 #### Decode
@@ -63,7 +63,7 @@ import JWT from 'expo-jwt';
 
 const key = 'shh';
 const token =
-  'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ==.mdsKdpOymFm2IqXTTtS1JLA/9XM1c/Cjo9IwZoRlFd8MshIjp/RifniPlz9Nq5LCVwa8xIFeKYeNu0pvNJl4JQ==';
+  'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.Kyojwz8Z5SckLbMU-EImuzHEjjg_1apSOLz_tsZQj1025OH--qaORzkHUkScScd8-RZnWUdCu0epiaofQZNkBA';
 
 JWT.decode(token, key);
 // => { foo: 'bar' }
