@@ -7,9 +7,9 @@ describe('Claims', () => {
   let pastTime;
 
   beforeEach(() => {
-    currentTime = Date.now();
-    futureTime = currentTime + 10000;
-    pastTime = currentTime - 10000;
+    currentTime = Date.parse(new Date()) / 1000;
+    futureTime = currentTime + 60;
+    pastTime = currentTime - 60;
   });
 
   describe('[exp] expiration time claim', () => {
