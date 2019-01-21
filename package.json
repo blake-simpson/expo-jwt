@@ -1,7 +1,7 @@
 {
   "name": "expo-jwt",
-  "version": "1.1.0",
-  "description": "Geberate and decode JWT inside of an React Native Expo app",
+  "version": "1.1.1",
+  "description": "Generate and decode JWT inside of an React Native Expo app",
   "main": "dist/index.js",
   "author": "Blake Simpson <blake.simpson@kartenmacherei.de>",
   "license": "MIT",
