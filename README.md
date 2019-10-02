@@ -87,3 +87,19 @@ JWT.decode(token, key, { sub: 'expected-subject' });
 // Audience - aud
 JWT.decode(token, key, { aud: 'expected-audience' });
 ```
+
+### Time Skew
+
+As mentioned in [issue 7](https://github.com/kartenmacherei/expo-jwt/issues/7)
+certain device clocks may be slightly off, causing time based claims to fail. If
+you are experiencing this issue you can pass the option `timeSkew` to
+`JWT.decode` which will take this into account.
+
+The value of this parameter is the number of seconds that the claim can be
+skewed by. Example:
+
+```js
+// Allow verification of tokens that include "exp", "nbf", or "iat" claims
+// within an additional 30 seconds of the system time.
+JWT.decode(token, key, { timeSkew: 30 });
+```

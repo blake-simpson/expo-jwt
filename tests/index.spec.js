@@ -15,6 +15,7 @@ export const expectedTokens = {
 describe('JWT', () => {
   for (let algorithm in expectedTokens) {
     let expectedToken = expectedTokens[algorithm];
+
     it(`can successfully encode and decode a token for algorithm ${algorithm}`, () => {
       const body = { foo: 'bar' };
       const encoded = JWT.encode(body, key, { algorithm });

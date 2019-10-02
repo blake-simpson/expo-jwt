@@ -24,7 +24,8 @@
     "build": "rm -rf dist && yarn babel ./lib --out-dir dist",
     "prepublish": "yarn test && yarn build",
     "test": "yarn jest",
-    "test:watch": "yarn jest --watchAll"
+    "test:watch": "yarn jest --watchAll",
+    "test:coverage": "yarn jest --coverage"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",

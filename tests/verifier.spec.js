@@ -28,6 +28,14 @@ describe('Claims', () => {
         new Verifier(body, 'exp');
       }).toThrowError(Errors.TokenExpired);
     });
+
+    it('handles time skew correctly', () => {
+      const body = { exp: pastTime };
+
+      expect(() => {
+        new Verifier(body, 'exp', { timeSkew: 60 });
+      }).not.toThrowError(Errors.TokenExpired);
+    });
   });
 
   describe('[nbf] not before claim', () => {
@@ -46,6 +54,14 @@ describe('Claims', () => {
         new Verifier(body, 'nbf');
       }).toThrowError(Errors.ImmatureSignature);
     });
+
+    it('handles time skew correctly', () => {
+      const body = { nbf: futureTime };
+
+      expect(() => {
+        new Verifier(body, 'nbf', { timeSkew: 60 });
+      }).not.toThrowError(Errors.ImmatureSignature);
+    });
   });
 
   describe('[iat] issued at claim', () => {
@@ -63,6 +79,14 @@ describe('Claims', () => {
       expect(() => {
         new Verifier(body, 'iat');
       }).toThrowError(Errors.IssuedAtInvalid);
+    });
+
+    it('handles time skew correctly', () => {
+      const body = { iat: futureTime };
+
+      expect(() => {
+        new Verifier(body, 'iat', { timeSkew: 60 });
+      }).not.toThrowError(Errors.IssuedAtInvalid);
     });
   });
 
