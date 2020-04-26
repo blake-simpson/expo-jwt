@@ -26,6 +26,7 @@ describe('JWT', () => {
 
       expect(decoded).toEqual(body);
     });
+    
     it(`can successfully decode a body without knowing the secret for algorithm ${algorithm}`, () => {
       const body = { foo: 'bar' };
       
