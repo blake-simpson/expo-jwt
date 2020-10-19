@@ -1,13 +1,13 @@
 {
   "name": "expo-jwt",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Generate and decode JWT inside of an React Native Expo app",
   "main": "dist/index.js",
-  "author": "Blake Simpson <blake.simpson@better.team>",
+  "author": "Blake Simpson <blakersim@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kartenmacherei/expo-jwt.git"
+    "url": "https://github.com/blake-simpson/expo-jwt.git"
   },
   "keywords": [
     "expo",
