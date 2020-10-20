@@ -1,8 +1,9 @@
 {
   "name": "expo-jwt",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Generate and decode JWT inside of an React Native Expo app",
-  "main": "dist/index.js",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "author": "Blake Simpson <blakersim@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -21,18 +22,19 @@
     "crypto-js": "^3.1.9-1"
   },
   "scripts": {
-    "build": "rm -rf dist && yarn babel ./lib --out-dir dist",
-    "prepublish": "yarn test && yarn build",
+    "compile": "yarn tsc",
+    "build": "rm -rf dist && yarn compile",
+    "prepublish": "yarn sanity && yarn build",
+    "sanity": "yarn compile && yarn test",
     "test": "yarn jest",
     "test:watch": "yarn jest --watchAll",
     "test:coverage": "yarn jest --coverage"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.0",
-    "@babel/core": "^7.5.0",
-    "@babel/preset-env": "^7.5.0",
-    "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
-    "regenerator-runtime": "^0.13.2"
+    "@types/crypto-js": "^4.0.1",
+    "@types/jest": "^26.0.15",
+    "jest": "^26.0.0",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
   }
 }

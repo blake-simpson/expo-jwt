@@ -6,20 +6,30 @@ import * as Errors from './errors';
 import algorithms, { supportedAlgorithms } from './algorithms';
 import { urlEncodeBase64 } from './helpers';
 
-let _key;
+import { EncodingKey, JWTBody, JWTHeader, DecodingOptions, JWTToken } from '../types/jwt';
 
-const parse = encodedString =>
+type AlgorithmFunction = typeof algorithms['HS256'];
+
+let _key: EncodingKey;
+
+const parse = (encodedString: string) =>
   JSON.parse(Base64.parse(encodedString).toString(Utf8));
 
-const sign = (body, algorithm) =>
+const sign = (body: string, algorithm: AlgorithmFunction) =>
   urlEncodeBase64(algorithm(body, _key).toString(Base64));
 
 class Decoder {
-  constructor(key) {
+  _header: JWTHeader;
+  _body: JWTBody;
+  options: DecodingOptions;
+  algorithm: 'none' | AlgorithmFunction;
+  signature: string;
+
+  constructor(key: EncodingKey) {
     _key = key;
   }
 
-  set header(header) {
+  set header(header: string) {
     try {
       this._header = parse(header);
     } catch (error) {
@@ -27,7 +37,7 @@ class Decoder {
     }
   }
 
-  set body(body) {
+  set body(body: string) {
     try {
       this._body = parse(body);
     } catch (error) {
@@ -53,7 +63,7 @@ class Decoder {
     return algorithms[algorithm];
   }
 
-  verifySignature(encodedHeader, encodedBody) {
+  verifySignature(encodedHeader: string, encodedBody: string) {
     if (this.algorithm === 'none') {
       return true;
     }
@@ -71,7 +81,7 @@ class Decoder {
     Verifier.verifyAll(this._body, this.options);
   }
 
-  decodeAndVerify(token, options = {}) {
+  decodeAndVerify(token: JWTToken, options: DecodingOptions = {}) {
     const [encodedHeader, encodedBody, signature] = token.toString().split('.');
 
     if (!encodedHeader || !encodedBody) {
