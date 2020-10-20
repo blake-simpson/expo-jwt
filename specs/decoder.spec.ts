@@ -15,8 +15,9 @@ describe('Decoder', () => {
         inputs.forEach(input => {
           it(`throws InvalidStructure error for the input "${input}"`, () => {
             expect(() => {
+              // @ts-ignore-next-line
               decoder.decodeAndVerify(input);
-            }).toThrowError(Errors.InvalidStructure);
+            }).toThrow(new Errors.InvalidStructure());
           });
         });
       });
@@ -26,7 +27,7 @@ describe('Decoder', () => {
 
         expect(() => {
           decoder.decodeAndVerify(token);
-        }).toThrowError(Errors.InvalidHeader);
+        }).toThrow(new Errors.InvalidHeader());
       });
 
       it('throws InvalidBody if the body cannot be parsed', () => {
@@ -34,7 +35,7 @@ describe('Decoder', () => {
 
         expect(() => {
           decoder.decodeAndVerify(token);
-        }).toThrowError(Errors.InvalidBody);
+        }).toThrow(new Errors.InvalidBody());
       });
 
       it('throws AlgorithmMissing if "alg" is missing from the header', () => {
@@ -42,7 +43,7 @@ describe('Decoder', () => {
 
         expect(() => {
           decoder.decodeAndVerify(token);
-        }).toThrowError(Errors.AlgorithmMissing);
+        }).toThrow(new Errors.AlgorithmMissing());
       });
 
       it('throws AlgorithmNotSupported if "alg" is not supported', () => {
@@ -50,7 +51,7 @@ describe('Decoder', () => {
 
         expect(() => {
           decoder.decodeAndVerify(token);
-        }).toThrowError(Errors.AlgorithmNotSupported);
+        }).toThrow(new Errors.AlgorithmNotSupported());
       });
     });
 
@@ -67,7 +68,7 @@ describe('Decoder', () => {
       it('throws if signature is invalid', () => {
         expect(() => {
           decoder.decodeAndVerify(token + 'XYZ');
-        }).toThrowError(Errors.SignatureInvalid);
+        }).toThrow(new Errors.SignatureInvalid());
       });
 
       it('validates claims', () => {

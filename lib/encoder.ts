@@ -5,27 +5,34 @@ import { AlgorithmNotSupported } from './errors';
 import algorithmMapping from './algorithms';
 import { urlEncodeBase64 } from './helpers';
 
+import { JWTToken, JWTBody, JWTHeader, EncodingOptions, DecodingOptions, EncodingKey } from '../types/jwt';
+import { SupportedAlgorithms } from '../types/algorithms';
+
 const defaultOptions = {
-  algorithm: 'HS256'
+  algorithm: SupportedAlgorithms.HS256,
 };
 
-let _key;
+let _key: EncodingKey;
 
 class Encoder {
-  constructor(body, key, options = {}) {
+  body: JWTBody;
+  options: EncodingOptions;
+
+  constructor(body: JWTBody, key: EncodingKey, options: EncodingOptions = {}) {
     this.body = body;
     this.options = { ...defaultOptions, ...options };
+
     _key = key;
   }
 
-  buildHeader() {
+  buildHeader(): JWTHeader {
     return {
       alg: this.options.algorithm,
       typ: 'JWT'
     };
   }
 
-  encodeAndSign() {
+  encodeAndSign(): JWTToken {
     const jsonHeader = JSON.stringify(this.buildHeader());
     const jsonBody = JSON.stringify(this.body);
 
@@ -35,7 +42,7 @@ class Encoder {
     const encodedHeader = urlEncodeBase64(base64Header);
     const encodedBody = urlEncodeBase64(base64Body);
 
-    if (this.options.algorithm === 'none') {
+    if (!this.options.algorithm || this.options.algorithm === 'none') {
       return `${encodedHeader}.${encodedBody}.`;
     }
 

@@ -1,27 +1,42 @@
 import * as Errors from './errors';
 
-const claims = ['exp', 'nbf', 'iat', 'sub', 'iss', 'aud'];
+import { DecodingOptions, JWTBody } from '../types/jwt';
+import { Claims } from '../types/claims';
 
-const parse = value => parseInt(value) || null;
+const claims = [
+  Claims.EXP,
+  Claims.NBF,
+  Claims.IAT,
+  Claims.SUB,
+  Claims.ISS,
+  Claims.AUD
+];
+
+const parseToNumber = (value?: string) => value ? (parseInt(value) || null) : null;
 
 class Verifier {
-  static verifyAll(body, options) {
+  body: JWTBody;
+  options: DecodingOptions;
+  time: number;
+  timeSkew: number;
+
+  static verifyAll(body: JWTBody, options: DecodingOptions) {
     claims.forEach(claim => {
       new this(body, claim, options);
     });
   }
 
-  constructor(body, claim, options = {}) {
+  constructor(body: JWTBody, claim: Claims, options: DecodingOptions = {}) {
     this.body = body;
     this.options = options;
-    this.time = Date.parse(new Date()) / 1000;
+    this.time = Date.parse((new Date()).toString()) / 1000;
     this.timeSkew = options.timeSkew || 0;
 
     this[`verify_${claim}`]();
   }
 
   verify_exp() {
-    const exp = parse(this.body.exp);
+    const exp = parseToNumber(this.body.exp);
 
     if (!exp) {
       return;
@@ -33,7 +48,7 @@ class Verifier {
   }
 
   verify_nbf() {
-    const nbf = parse(this.body.nbf);
+    const nbf = parseToNumber(this.body.nbf);
 
     if (!nbf) {
       return;
@@ -45,9 +60,9 @@ class Verifier {
   }
 
   verify_iat() {
-    const iat = parse(this.body.iat);
+    const iat = parseToNumber(this.body.iat);
 
-    if (!this.body.iat) {
+    if (!this.body.iat || !iat) {
       return;
     }
 
