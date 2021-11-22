@@ -32,7 +32,11 @@ class Verifier {
     this.time = Date.parse((new Date()).toString()) / 1000;
     this.timeSkew = options.timeSkew || 0;
 
-    this[`verify_${claim}`]();
+    const methodName = `verify_${claim}`;
+
+    if (this[methodName]) {
+      this[methodName]();
+    }
   }
 
   verify_exp() {

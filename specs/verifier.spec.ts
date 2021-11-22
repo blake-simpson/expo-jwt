@@ -101,7 +101,7 @@ describe('Claims', () => {
       }).not.toThrow(new Errors.InvalidSubject());
     });
 
-    it("throws subject doesn't match", () => {
+    it("throws invalid subject", () => {
       const body = { sub: 'subject' };
 
       expect(() => {
@@ -119,7 +119,7 @@ describe('Claims', () => {
       }).not.toThrow(new Errors.InvalidIssuer());
     });
 
-    it("throws subject doesn't match", () => {
+    it("throws invalid issuer", () => {
       const body = { iss: 'authority' };
 
       expect(() => {
@@ -137,12 +137,22 @@ describe('Claims', () => {
       }).not.toThrow(new Errors.InvalidAudience());
     });
 
-    it("throws subject doesn't match", () => {
+    it("throws invalid audience", () => {
       const body = { aud: 'audience' };
 
       expect(() => {
         new Verifier(body, Claims.AUD, { aud: 'something-else' });
       }).toThrow(new Errors.InvalidAudience());
+    });
+  });
+
+  describe('unknown claim', () => {
+    it("doesn't throw an error", () => {
+      const body = { aud: 'audience' };
+
+      expect(() => {
+        new Verifier(body, ('foo' as any), { aud: 'something-else' });
+      }).not.toThrow();
     });
   });
 });
