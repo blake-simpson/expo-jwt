@@ -9,10 +9,11 @@ const claims = [
   Claims.IAT,
   Claims.SUB,
   Claims.ISS,
-  Claims.AUD
+  Claims.AUD,
 ];
 
-const parseToNumber = (value?: string) => value ? (parseInt(value) || null) : null;
+const parseToNumber = (value?: string) =>
+  value ? parseInt(value) || null : null;
 
 class Verifier {
   body: JWTBody;
@@ -21,7 +22,7 @@ class Verifier {
   timeSkew: number;
 
   static verifyAll(body: JWTBody, options: DecodingOptions) {
-    claims.forEach(claim => {
+    claims.forEach((claim) => {
       new this(body, claim, options);
     });
   }
@@ -29,7 +30,7 @@ class Verifier {
   constructor(body: JWTBody, claim: Claims, options: DecodingOptions = {}) {
     this.body = body;
     this.options = options;
-    this.time = Date.parse((new Date()).toString()) / 1000;
+    this.time = Date.parse(new Date().toString()) / 1000;
     this.timeSkew = options.timeSkew || 0;
 
     const methodName = `verify_${claim}`;

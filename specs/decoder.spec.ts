@@ -12,7 +12,7 @@ describe('Decoder', () => {
       describe('structure invalid', () => {
         const inputs = [123, {}, [], '', 'foo', 'header.'];
 
-        inputs.forEach(input => {
+        inputs.forEach((input) => {
           it(`throws InvalidStructure error for the input "${input}"`, () => {
             expect(() => {
               // @ts-ignore-next-line
@@ -77,6 +77,18 @@ describe('Decoder', () => {
         decoder.decodeAndVerify(token);
 
         expect(spy).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('with generic types', () => {
+      const body = { number: 42 };
+      const token = generate(body);
+
+      it('accepts the generic type and returns the body', () => {
+        type TestBodyType = Record<string, number>;
+        const actual = decoder.decodeAndVerify<TestBodyType>(token);
+
+        expect(actual).toEqual(body);
       });
     });
   });

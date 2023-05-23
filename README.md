@@ -16,13 +16,13 @@ JavaScript so it can be used inside of an Expo project.
 ## Supported Algorithms
 
 | HS256 | HS384 | HS512 | RS256 | RS384 | RS512 | ES256 | ES384 | ES512 |
-| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+|-------|-------|-------|-------|-------|-------|-------|-------|-------|
 | Yes   | Yes   | Yes   | No    | No    | No    | No    | No    | No    |
 
 ## Supported Claims
 
 | exp | nbf | iat | sub | iss | aud | jti |
-| --- | --- | --- | --- | --- | --- | --- |
+|-----|-----|-----|-----|-----|-----|-----|
 | Yes | Yes | Yes | Yes | Yes | Yes | No  |
 
 ## Installation
@@ -39,7 +39,7 @@ yarn add expo-jwt
 
 ## Usage
 
-#### Encode
+### Encode
 
 ```js
 import JWT from 'expo-jwt';
@@ -56,7 +56,7 @@ JWT.encode({ foo: 'bar' }, key, { algorithm: 'none' });
 // => eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJmb28iOiJiYXIifQ.
 ```
 
-#### Decode
+### Decode
 
 ```js
 import JWT from 'expo-jwt';
@@ -86,6 +86,19 @@ JWT.decode(token, key, { sub: 'expected-subject' });
 
 // Audience - aud
 JWT.decode(token, key, { aud: 'expected-audience' });
+```
+
+### TypeScript
+
+If you would like to take advantage of a typed `decode` object body, you may pass a generic:
+
+```ts
+const foo = JWT.decode(token, key);
+// foo === any
+
+type MyType = Record<string, number>;
+const bar = JWT.decode<MyType>(token, key);
+// bar === MyType
 ```
 
 ### Time Skew
