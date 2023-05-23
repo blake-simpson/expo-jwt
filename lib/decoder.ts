@@ -6,9 +6,15 @@ import * as Errors from './errors';
 import algorithms, { supportedAlgorithms } from './algorithms';
 import { urlEncodeBase64 } from './helpers';
 
-import { EncodingKey, JWTBody, JWTHeader, DecodingOptions, JWTToken } from '../types/jwt';
+import {
+  EncodingKey,
+  JWTBody,
+  JWTHeader,
+  DecodingOptions,
+  JWTToken,
+} from '../types/jwt';
 
-type AlgorithmFunction = typeof algorithms['HS256'];
+type AlgorithmFunction = (typeof algorithms)['HS256'];
 
 let _key: EncodingKey;
 
@@ -81,7 +87,7 @@ class Decoder {
     Verifier.verifyAll(this._body, this.options);
   }
 
-  decodeAndVerify(token: JWTToken, options: DecodingOptions = {}) {
+  decodeAndVerify<T>(token: JWTToken, options: DecodingOptions = {}) {
     const [encodedHeader, encodedBody, signature] = token.toString().split('.');
 
     if (!encodedHeader || !encodedBody) {
@@ -94,12 +100,12 @@ class Decoder {
     this.signature = signature;
     this.algorithm = this.getAlgorithm();
 
-    if(_key !== null) {
+    if (_key !== null) {
       this.verifySignature(encodedHeader, encodedBody);
     }
     this.verifyClaims();
 
-    return this._body;
+    return this._body as JWTBody<T>;
   }
 }
 

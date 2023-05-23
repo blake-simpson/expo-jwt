@@ -1,7 +1,13 @@
 import Encoder from './encoder';
 import Decoder from './decoder';
 
-import { JWTBody, JWTToken, EncodingOptions, DecodingOptions, EncodingKey } from '../types/jwt';
+import {
+  JWTBody,
+  JWTToken,
+  EncodingOptions,
+  DecodingOptions,
+  EncodingKey,
+} from '../types/jwt';
 
 const JWT = {
   encode: (body: JWTBody, key: EncodingKey, options: EncodingOptions = {}) => {
@@ -10,11 +16,15 @@ const JWT = {
     return encoder.encodeAndSign();
   },
 
-  decode: (token: JWTToken, key: EncodingKey, options: DecodingOptions = {}) => {
+  decode: <T>(
+    token: JWTToken,
+    key: EncodingKey,
+    options: DecodingOptions = {}
+  ) => {
     const decoder = new Decoder(key);
 
-    return decoder.decodeAndVerify(token, options);
-  }
+    return decoder.decodeAndVerify<T>(token, options);
+  },
 };
 
 export default JWT;

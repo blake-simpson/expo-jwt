@@ -7,7 +7,7 @@ import HmacSHA512 from 'crypto-js/hmac-sha512';
 const mapping: Record<string, HmacHasherHelper> = {
   HS256: HmacSHA256,
   HS384: HmacSHA384,
-  HS512: HmacSHA512
+  HS512: HmacSHA512,
 };
 
 export const supportedAlgorithms = Object.keys(mapping);

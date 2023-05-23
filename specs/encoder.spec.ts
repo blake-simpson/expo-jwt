@@ -14,19 +14,21 @@ describe('Encoder', () => {
       const actual = jwt.buildHeader();
       const expected = {
         alg: 'HS256',
-        typ: 'JWT'
+        typ: 'JWT',
       };
 
       expect(actual).toEqual(expected);
     });
 
     it('uses the algorithm from the options', () => {
-      const jwt = new Encoder(body, key, { algorithm: SupportedAlgorithms.HS512 });
+      const jwt = new Encoder(body, key, {
+        algorithm: SupportedAlgorithms.HS512,
+      });
 
       const actual = jwt.buildHeader();
       const expected = {
         alg: 'HS512',
-        typ: 'JWT'
+        typ: 'JWT',
       };
 
       expect(actual).toEqual(expected);
@@ -50,7 +52,9 @@ describe('Encoder', () => {
       const expected = expectedTokens.NONE;
 
       it('encodes the token without a signature', () => {
-        const jwt = new Encoder(body, key, { algorithm: SupportedAlgorithms.NONE });
+        const jwt = new Encoder(body, key, {
+          algorithm: SupportedAlgorithms.NONE,
+        });
         const actual = jwt.encodeAndSign();
 
         expect(actual).toEqual(expected);
@@ -68,7 +72,9 @@ describe('Encoder', () => {
       });
 
       it('encodes the token correctly (with algorithm option)', () => {
-        const jwt = new Encoder(body, key, { algorithm: SupportedAlgorithms.HS256 });
+        const jwt = new Encoder(body, key, {
+          algorithm: SupportedAlgorithms.HS256,
+        });
         const actual = jwt.encodeAndSign();
 
         expect(actual).toEqual(expected);
@@ -77,7 +83,9 @@ describe('Encoder', () => {
 
     describe('HS384', () => {
       it('encodes the token correctly', () => {
-        const jwt = new Encoder(body, key, { algorithm: SupportedAlgorithms.HS384 });
+        const jwt = new Encoder(body, key, {
+          algorithm: SupportedAlgorithms.HS384,
+        });
 
         const expected = expectedTokens.HS384;
         const actual = jwt.encodeAndSign();
@@ -88,7 +96,9 @@ describe('Encoder', () => {
 
     describe('HS512', () => {
       it('encodes the token correctly', () => {
-        const jwt = new Encoder(body, key, { algorithm: SupportedAlgorithms.HS512 });
+        const jwt = new Encoder(body, key, {
+          algorithm: SupportedAlgorithms.HS512,
+        });
 
         const expected = expectedTokens.HS512;
         const actual = jwt.encodeAndSign();

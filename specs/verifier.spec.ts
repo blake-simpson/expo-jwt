@@ -9,7 +9,7 @@ describe('Claims', () => {
   let pastTime: number;
 
   beforeEach(() => {
-    currentTime = Date.parse((new Date()).toString()) / 1000;
+    currentTime = Date.parse(new Date().toString()) / 1000;
     futureTime = currentTime + 60;
     pastTime = currentTime - 60;
   });
@@ -101,7 +101,7 @@ describe('Claims', () => {
       }).not.toThrow(new Errors.InvalidSubject());
     });
 
-    it("throws invalid subject", () => {
+    it('throws invalid subject', () => {
       const body = { sub: 'subject' };
 
       expect(() => {
@@ -119,7 +119,7 @@ describe('Claims', () => {
       }).not.toThrow(new Errors.InvalidIssuer());
     });
 
-    it("throws invalid issuer", () => {
+    it('throws invalid issuer', () => {
       const body = { iss: 'authority' };
 
       expect(() => {
@@ -137,7 +137,7 @@ describe('Claims', () => {
       }).not.toThrow(new Errors.InvalidAudience());
     });
 
-    it("throws invalid audience", () => {
+    it('throws invalid audience', () => {
       const body = { aud: 'audience' };
 
       expect(() => {
@@ -151,7 +151,7 @@ describe('Claims', () => {
       const body = { aud: 'audience' };
 
       expect(() => {
-        new Verifier(body, ('foo' as any), { aud: 'something-else' });
+        new Verifier(body, 'foo' as Claims, { aud: 'something-else' });
       }).not.toThrow();
     });
   });

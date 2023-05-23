@@ -5,7 +5,14 @@ import { AlgorithmNotSupported } from './errors';
 import algorithmMapping from './algorithms';
 import { urlEncodeBase64 } from './helpers';
 
-import { JWTToken, JWTBody, JWTHeader, EncodingOptions, DecodingOptions, EncodingKey } from '../types/jwt';
+import {
+  JWTToken,
+  JWTBody,
+  JWTHeader,
+  EncodingOptions,
+  DecodingOptions,
+  EncodingKey,
+} from '../types/jwt';
 import { SupportedAlgorithms } from '../types/algorithms';
 
 const defaultOptions = {
@@ -28,7 +35,7 @@ class Encoder {
   buildHeader(): JWTHeader {
     return {
       alg: this.options.algorithm,
-      typ: 'JWT'
+      typ: 'JWT',
     };
   }
 
