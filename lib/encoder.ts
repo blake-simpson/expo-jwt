@@ -10,7 +10,6 @@ import {
   JWTBody,
   JWTHeader,
   EncodingOptions,
-  DecodingOptions,
   EncodingKey,
 } from '../types/jwt';
 import { SupportedAlgorithms } from '../types/algorithms';

@@ -20,7 +20,7 @@ const JWT = {
     token: JWTToken,
     key: EncodingKey,
     options: DecodingOptions = {}
-  ) => {
+  ): JWTBody<T> => {
     const decoder = new Decoder(key);
 
     return decoder.decodeAndVerify<T>(token, options);
