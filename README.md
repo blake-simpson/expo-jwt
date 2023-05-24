@@ -94,11 +94,11 @@ If you would like to take advantage of a typed `decode` object body, you may pas
 
 ```ts
 const foo = JWT.decode(token, key);
-// foo === any
+// foo.body === any
 
 type MyType = Record<string, number>;
 const bar = JWT.decode<MyType>(token, key);
-// bar === MyType
+// bar.body === MyType
 ```
 
 ### Time Skew

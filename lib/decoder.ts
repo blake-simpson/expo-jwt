@@ -87,7 +87,10 @@ class Decoder {
     Verifier.verifyAll(this._body, this.options);
   }
 
-  decodeAndVerify<T>(token: JWTToken, options: DecodingOptions = {}) {
+  decodeAndVerify<T>(
+    token: JWTToken,
+    options: DecodingOptions = {}
+  ): JWTBody<T> {
     const [encodedHeader, encodedBody, signature] = token.toString().split('.');
 
     if (!encodedHeader || !encodedBody) {
@@ -105,7 +108,7 @@ class Decoder {
     }
     this.verifyClaims();
 
-    return this._body as JWTBody<T>;
+    return this._body;
   }
 }
 

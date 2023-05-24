@@ -29,7 +29,7 @@ describe('JWT', () => {
       expect(decoded).toEqual(body);
     });
 
-    it(`can successfully decode a body without knowing the secret for algorithm ${algorithmType}`, () => {
+    it(`can successfully decode a body without knowing the algorithm for ${algorithmType}`, () => {
       const body = { foo: 'bar' };
       const decodedBody = JWT.decode(expectedToken, key);
 
