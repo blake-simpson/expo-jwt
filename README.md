@@ -63,6 +63,19 @@ JWT.decode(token, key);
 // => { foo: 'bar' }
 ```
 
+## TypeScript
+
+If you would like to take advantage of a typed `decode` object body, you may pass a generic:
+
+```ts
+const foo = JWT.decode(token, key);
+// foo.body === any
+
+type MyType = Record<string, number>;
+const bar = JWT.decode<MyType>(token, key);
+// bar.body === MyType
+```
+
 ## JWT Claims
 
 The claims `exp`, `nbf`, and `iat` will automatically be verified if the decoded
@@ -80,19 +93,6 @@ JWT.decode(token, key, { sub: 'expected-subject' });
 
 // Audience - aud
 JWT.decode(token, key, { aud: 'expected-audience' });
-```
-
-### TypeScript
-
-If you would like to take advantage of a typed `decode` object body, you may pass a generic:
-
-```ts
-const foo = JWT.decode(token, key);
-// foo.body === any
-
-type MyType = Record<string, number>;
-const bar = JWT.decode<MyType>(token, key);
-// bar.body === MyType
 ```
 
 ### Time Skew
