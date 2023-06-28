@@ -31,12 +31,6 @@ JavaScript so it can be used inside of an Expo project.
 npm install --save expo-jwt
 ```
 
-or
-
-```bash
-yarn add expo-jwt
-```
-
 ## Usage
 
 ### Encode

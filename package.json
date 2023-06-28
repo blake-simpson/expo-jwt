@@ -22,13 +22,13 @@
     "crypto-js": "^3.1.9-1"
   },
   "scripts": {
-    "compile": "yarn tsc",
-    "build": "rm -rf dist && yarn compile",
-    "prepublish": "yarn sanity && yarn build",
-    "sanity": "yarn compile && yarn test",
-    "test": "yarn jest",
-    "test:watch": "yarn jest --watchAll",
-    "test:coverage": "yarn jest --coverage"
+    "compile": "npx tsc",
+    "build": "rm -rf dist && npm run compile",
+    "prepublish": "npm run sanity && npm run build",
+    "sanity": "npm run compile && npm test",
+    "test": "npx jest",
+    "test:watch": "npx jest --watchAll",
+    "test:coverage": "npx jest --coverage"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.0.1",
