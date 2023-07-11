@@ -36,4 +36,19 @@ describe('JWT', () => {
       expect(decodedBody).toEqual(body);
     });
   }
+
+  it('can encode/decode a token containing a URL', () => {
+    const url = 'http://foo.bar/my?query=a+string';
+    const body = { url };
+    const encoded = JWT.encode(body, key);
+
+    expect(encoded).toEqual(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJodHRwOi8vZm9vLmJhci9teT9xdWVyeT1hK3N0cmluZyJ9.30WawwLOYElH0NuqjXaPGPR1BMHnkHyj-MuW_WNa8Jo'
+    );
+
+    const decoded = JWT.decode(encoded, key);
+
+    expect(decoded).toEqual(body);
+    expect(decoded.url).toEqual(url);
+  });
 });
