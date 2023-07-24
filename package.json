@@ -1,6 +1,6 @@
 {
   "name": "expo-jwt",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Generate and decode JWT inside of an React Native Expo app",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
