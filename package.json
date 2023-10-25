@@ -19,7 +19,7 @@
     "dist"
   ],
   "dependencies": {
-    "crypto-js": "^3.1.9-1"
+    "crypto-js": "^4.2.0"
   },
   "scripts": {
     "compile": "npx tsc",
