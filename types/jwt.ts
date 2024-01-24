@@ -13,7 +13,7 @@ export type EncodingOptions = {
   algorithm?: SupportedAlgorithms;
 };
 
-export type DecodingOptions = {
+export type DecodingOptions = EncodingOptions & {
   exp?: number;
   nbf?: number;
   iat?: number;
@@ -23,4 +23,4 @@ export type DecodingOptions = {
   timeSkew?: number;
 };
 
-export type EncodingKey = string;
+export type EncodingKey = string | null;
