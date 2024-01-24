@@ -36,17 +36,17 @@ npm install --save expo-jwt
 ### Encode
 
 ```js
-import JWT from 'expo-jwt';
+import JWT, { SupportedAlgorithms } from 'expo-jwt';
 
 const key = 'shh';
 
 JWT.encode({ foo: 'bar' }, key);
 // => eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.YVoZ0LkWCMCnwEf7Nju2SJt_9mseJP1Q3RvCz4frGwM
 
-JWT.encode({ foo: 'bar' }, key, { algorithm: 'HS512' });
+JWT.encode({ foo: 'bar' }, key, { algorithm: SupportedAlgorithms.HS512 });
 // => eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.Kyojwz8Z5SckLbMU-EImuzHEjjg_1apSOLz_tsZQj1025OH--qaORzkHUkScScd8-RZnWUdCu0epiaofQZNkBA
 
-JWT.encode({ foo: 'bar' }, key, { algorithm: 'none' });
+JWT.encode({ foo: 'bar' }, key, { algorithm: SupportedAlgorithms.NONE });
 // => eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJmb28iOiJiYXIifQ.
 ```
 
