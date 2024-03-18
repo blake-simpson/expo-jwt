@@ -1,6 +1,16 @@
 import { SupportedAlgorithms } from './algorithms';
 
-export type JWTBody<T = any> = Record<string, T>;
+export type JWTStandardClaims = {
+  iss?: string;
+  sub?: string;
+  aud?: string[] | string;
+  exp?: number;
+  nbf?: number;
+  iat?: number;
+  jti?: string;
+}
+
+export type JWTBody<T = Record<string, any>> = T & JWTStandardClaims;
 
 export type JWTToken = string;
 
