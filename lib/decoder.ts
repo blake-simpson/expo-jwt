@@ -108,7 +108,7 @@ class Decoder {
     }
     this.verifyClaims();
 
-    return this._body;
+    return this._body as JWTBody<T>;
   }
 }
 
