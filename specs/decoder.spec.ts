@@ -81,12 +81,14 @@ describe('Decoder', () => {
     });
 
     describe('with generic types', () => {
+      type TestBodyType = Record<string, number>;
+
+      const typedDecoder = new Decoder<TestBodyType>(key);
       const body = { number: 42 };
       const token = generate(body);
 
       it('accepts the generic type and returns the body', () => {
-        type TestBodyType = Record<string, number>;
-        const actual = decoder.decodeAndVerify<TestBodyType>(token);
+        const actual = typedDecoder.decodeAndVerify(token);
 
         expect(actual).toEqual(body);
       });

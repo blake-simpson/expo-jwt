@@ -7,6 +7,7 @@ import {
   EncodingOptions,
   DecodingOptions,
   EncodingKey,
+  JWTDefaultBody,
 } from '../types/jwt';
 
 const JWT = {
@@ -16,14 +17,14 @@ const JWT = {
     return encoder.encodeAndSign();
   },
 
-  decode: <T = Record<string, any>>(
+  decode: <T = JWTDefaultBody>(
     token: JWTToken,
     key: EncodingKey,
     options: DecodingOptions = {}
   ): JWTBody<T> => {
-    const decoder = new Decoder(key);
+    const decoder = new Decoder<T>(key);
 
-    return decoder.decodeAndVerify<T>(token, options);
+    return decoder.decodeAndVerify(token, options);
   },
 };
 

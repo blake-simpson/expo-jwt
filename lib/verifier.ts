@@ -12,21 +12,8 @@ const claims = [
   Claims.AUD,
 ];
 
-const parseToNumber = (value?: string | number) => {
-  if(typeof(value) === 'number') {
-    return value;
-  } else if(typeof(value) === 'string') {
-    const parsed = parseInt(value);
-
-    if (isNaN(parsed)) {
-      return null;
-    }
-
-    return parsed;
-  }
-
-  return null;
-}
+const parseToNumber = (value?: string | number) =>
+  value ? parseInt(value.toString()) || undefined : undefined;
 
 class Verifier {
   body: JWTBody;
