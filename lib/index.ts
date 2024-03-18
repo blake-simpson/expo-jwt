@@ -16,7 +16,7 @@ const JWT = {
     return encoder.encodeAndSign();
   },
 
-  decode: <T>(
+  decode: <T = Record<string, any>>(
     token: JWTToken,
     key: EncodingKey,
     options: DecodingOptions = {}
