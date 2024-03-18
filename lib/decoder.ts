@@ -24,9 +24,9 @@ const parse = (encodedString: string) =>
 const sign = (body: string, algorithm: AlgorithmFunction) =>
   urlEncodeBase64(algorithm(body, _key).toString(Base64));
 
-class Decoder {
+class Decoder<T> {
   _header: JWTHeader;
-  _body: JWTBody;
+  _body: JWTBody<T>;
   options: DecodingOptions;
   algorithm: 'none' | AlgorithmFunction;
   signature: string;
@@ -87,7 +87,7 @@ class Decoder {
     Verifier.verifyAll(this._body, this.options);
   }
 
-  decodeAndVerify<T>(
+  decodeAndVerify(
     token: JWTToken,
     options: DecodingOptions = {}
   ): JWTBody<T> {
@@ -108,7 +108,7 @@ class Decoder {
     }
     this.verifyClaims();
 
-    return this._body as JWTBody<T>;
+    return this._body;
   }
 }
 

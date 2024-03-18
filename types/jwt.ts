@@ -10,7 +10,8 @@ export type JWTStandardClaims = {
   jti?: string;
 }
 
-export type JWTBody<T = Record<string, any>> = T & JWTStandardClaims;
+export type JWTDefaultBody = Record<string, any>;
+export type JWTBody<T = JWTDefaultBody> = T & JWTStandardClaims;
 
 export type JWTToken = string;
 
