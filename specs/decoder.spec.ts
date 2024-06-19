@@ -72,7 +72,7 @@ describe('Decoder', () => {
       });
 
       it('validates claims', () => {
-        const spy = spyOn(Verifier, 'verifyAll');
+        const spy = jest.spyOn(Verifier, 'verifyAll');
 
         decoder.decodeAndVerify(token);
 
