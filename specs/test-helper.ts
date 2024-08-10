@@ -1,10 +1,10 @@
 import Encoder from '../lib/encoder';
-import { EncodingOptions, JWTBody } from '../types/jwt';
+import { HeaderOptions, JWTBody } from '../types/jwt';
 
 export const key = 'shh';
 export const body = { foo: 'bar' };
 
-export const generate = (body: JWTBody, opts: EncodingOptions = {}) => {
-  const encoder = new Encoder(body, key, opts);
+export const generate = (body: JWTBody, header: HeaderOptions = {}) => {
+  const encoder = new Encoder(body, key, header);
   return encoder.encodeAndSign();
 };

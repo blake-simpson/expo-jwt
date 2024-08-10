@@ -33,6 +33,38 @@ describe('Encoder', () => {
 
       expect(actual).toEqual(expected);
     });
+
+    it('builds all headers for JWT', () => {
+      const jwt = new Encoder(body, key, {
+        algorithm: SupportedAlgorithms.HS512,
+        jku: 'https://example.com/jku',
+        jwk: 'https://example.com/jwk',
+        kid: 'key-id',
+        x5u: 'https://example.com/x5u',
+        x5c: 'https://example.com/x5c',
+        x5t: 'x5t',
+        'x5t#S256': 'x5t#S256',
+        cty: 'cty',
+        crit: ['crit'],
+      });
+
+      const actual = jwt.buildHeader();
+      const expected = {
+        alg: 'HS512',
+        typ: 'JWT',
+        jku: 'https://example.com/jku',
+        jwk: 'https://example.com/jwk',
+        kid: 'key-id',
+        x5u: 'https://example.com/x5u',
+        x5c: 'https://example.com/x5c',
+        x5t: 'x5t',
+        'x5t#S256': 'x5t#S256',
+        cty: 'cty',
+        crit: ['crit'],
+      };
+
+      expect(actual).toEqual(expected);
+    });
   });
 
   describe('#encodeAndSign with algorithm', () => {

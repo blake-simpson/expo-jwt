@@ -8,23 +8,42 @@ export type JWTStandardClaims = {
   nbf?: number;
   iat?: number;
   jti?: string;
-}
+};
 
 export type JWTDefaultBody = Record<string, any>;
 export type JWTBody<T = JWTDefaultBody> = T & JWTStandardClaims;
 
 export type JWTToken = string;
 
-export type JWTHeader = {
-  alg: EncodingOptions['algorithm'];
-  typ: string;
-};
-
-export type EncodingOptions = {
+export type HeaderOptions = {
   algorithm?: SupportedAlgorithms;
+  alg?: SupportedAlgorithms;
+  jku?: string;
+  jwk?: string;
+  kid?: string;
+  x5u?: string;
+  x5c?: string;
+  x5t?: string;
+  ['x5t#S256']?: string;
+  cty?: string;
+  crit?: string[];
 };
 
-export type DecodingOptions = EncodingOptions & {
+export type JWTHeader = {
+  alg: HeaderOptions['algorithm'];
+  typ: string;
+  jku?: string;
+  jwk?: string;
+  kid?: string;
+  x5u?: string;
+  x5c?: string;
+  x5t?: string;
+  ['x5t#S256']?: string;
+  cty?: string;
+  crit?: string[];
+};
+
+export type DecodingOptions = {
   exp?: number;
   nbf?: number;
   iat?: number;

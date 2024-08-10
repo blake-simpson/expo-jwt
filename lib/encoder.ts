@@ -9,37 +9,49 @@ import {
   JWTToken,
   JWTBody,
   JWTHeader,
-  EncodingOptions,
+  HeaderOptions,
   EncodingKey,
 } from '../types/jwt';
 import { SupportedAlgorithms } from '../types/algorithms';
 
-const defaultOptions = {
-  algorithm: SupportedAlgorithms.HS256,
-};
-
 let _key: EncodingKey;
+
+const stripAlgorithmOptions = (options: HeaderOptions): HeaderOptions => {
+  const { algorithm, alg, ...strippedOptions } = options;
+
+  return strippedOptions;
+};
 
 class Encoder {
   body: JWTBody;
-  options: EncodingOptions;
+  header: JWTHeader;
 
-  constructor(body: JWTBody, key: EncodingKey, options: EncodingOptions = {}) {
+  constructor(
+    body: JWTBody,
+    key: EncodingKey,
+    headerOptions: HeaderOptions = {}
+  ) {
     this.body = body;
-    this.options = { ...defaultOptions, ...options };
+    this.header = {
+      alg:
+        headerOptions.algorithm ||
+        headerOptions.alg ||
+        SupportedAlgorithms.HS256,
+      typ: 'JWT',
+      ...stripAlgorithmOptions(headerOptions),
+    };
 
     _key = key;
   }
 
   buildHeader(): JWTHeader {
-    return {
-      alg: this.options.algorithm,
-      typ: 'JWT',
-    };
+    // This function is somewhat unecessary now but it is needed for backwards compatibility
+    // Possible alias it to getHeader in future, or strip out fully in 2.0
+    return this.header;
   }
 
   encodeAndSign(): JWTToken {
-    const jsonHeader = JSON.stringify(this.buildHeader());
+    const jsonHeader = JSON.stringify(this.header);
     const jsonBody = JSON.stringify(this.body);
 
     const base64Header = Base64.stringify(Utf8.parse(jsonHeader));
@@ -48,11 +60,11 @@ class Encoder {
     const encodedHeader = urlEncodeBase64(base64Header);
     const encodedBody = urlEncodeBase64(base64Body);
 
-    if (!this.options.algorithm || this.options.algorithm === 'none') {
+    if (!this.header.alg || this.header.alg === 'none') {
       return `${encodedHeader}.${encodedBody}.`;
     }
 
-    const algorithm = algorithmMapping[this.options.algorithm];
+    const algorithm = algorithmMapping[this.header.alg];
 
     if (!algorithm) {
       throw new AlgorithmNotSupported();
