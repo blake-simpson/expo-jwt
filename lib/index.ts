@@ -4,14 +4,14 @@ import Decoder from './decoder';
 import {
   JWTBody,
   JWTToken,
-  EncodingOptions,
+  HeaderOptions,
   DecodingOptions,
   EncodingKey,
   JWTDefaultBody,
 } from '../types/jwt';
 
 const JWT = {
-  encode: (body: JWTBody, key: EncodingKey, options: EncodingOptions = {}) => {
+  encode: (body: JWTBody, key: EncodingKey, options: HeaderOptions = {}) => {
     const encoder = new Encoder(body, key, options);
 
     return encoder.encodeAndSign();
