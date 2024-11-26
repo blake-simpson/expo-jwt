@@ -1,10 +1,10 @@
-import Base64 from "crypto-js/enc-base64";
-import Utf8 from "crypto-js/enc-utf8";
+import Base64 from 'crypto-js/enc-base64';
+import Utf8 from 'crypto-js/enc-utf8';
 
-import Verifier from "./verifier";
-import * as Errors from "./errors";
-import algorithms, { supportedAlgorithms } from "./algorithms";
-import { urlEncodeBase64, urlSafeBase64ToBase64 } from "./helpers";
+import Verifier from './verifier';
+import * as Errors from './errors';
+import algorithms, { supportedAlgorithms } from './algorithms';
+import { urlEncodeBase64, urlSafeBase64ToBase64 } from './helpers';
 
 import {
   EncodingKey,
@@ -12,9 +12,9 @@ import {
   JWTHeader,
   DecodingOptions,
   JWTToken,
-} from "../types/jwt";
+} from '../types/jwt';
 
-type AlgorithmFunction = (typeof algorithms)["HS256"];
+type AlgorithmFunction = (typeof algorithms)['HS256'];
 
 let _key: EncodingKey;
 
@@ -30,7 +30,7 @@ class Decoder<T> {
   _header: JWTHeader;
   _body: JWTBody<T>;
   options: DecodingOptions;
-  algorithm: "none" | AlgorithmFunction;
+  algorithm: 'none' | AlgorithmFunction;
   signature: string;
 
   constructor(key: EncodingKey) {
@@ -60,8 +60,8 @@ class Decoder<T> {
       throw new Errors.AlgorithmMissing();
     }
 
-    if (algorithm === "none") {
-      return "none";
+    if (algorithm === 'none') {
+      return 'none';
     }
 
     if (!~supportedAlgorithms.indexOf(algorithm)) {
@@ -72,7 +72,7 @@ class Decoder<T> {
   }
 
   verifySignature(encodedHeader: string, encodedBody: string) {
-    if (this.algorithm === "none") {
+    if (this.algorithm === 'none') {
       return true;
     }
 
@@ -90,7 +90,7 @@ class Decoder<T> {
   }
 
   decodeAndVerify(token: JWTToken, options: DecodingOptions = {}): JWTBody<T> {
-    const [encodedHeader, encodedBody, signature] = token.toString().split(".");
+    const [encodedHeader, encodedBody, signature] = token.toString().split('.');
 
     if (!encodedHeader || !encodedBody) {
       throw new Errors.InvalidStructure();
