@@ -7,8 +7,11 @@ export const urlEncodeBase64 = (signature: string): string => {
 };
 
 export const urlSafeBase64ToBase64 = (signature) => {
-  if (isUrlSafeBase64(signature))
+  if (isUrlSafeBase64(signature)) {
     return signature.replace(/-/g, '+').replace(/_/g, '/');
+  }
+
+  return signature;
 };
 
 export const isUrlSafeBase64 = (content: string) =>

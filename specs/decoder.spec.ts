@@ -96,38 +96,25 @@ describe('Decoder', () => {
 
     describe('with urlBase64 parse', () => {
       type TestBodyType = Record<string, any>;
-      const typedDecoder = new Decoder<TestBodyType>(key);
+
       const body = {
         code: 1,
         message: 'OK',
+        name: 'JohnDoe',
         data: {
-          user: {
-            level_experience_upper_limit: 9999,
-            total_level_experience: 'xxx',
-            current_level_process_rate: 0.0996,
-            employer_invite_code: 'BQ4W8Q',
-            level_reward_rate: 0.996,
-            id: '*****',
-            invite_code: 'EQYUNC',
-            has_transactions: true,
-            level: 3,
-            avatar_url:
-              'https://app-xxxx.x.x-xx.xxx.com/public/development/avatarImage/924e97db-XXX-XX-ABAB-AA33ee9e3ecx.png?imageMogr2/crop/50x50',
-            first_name: 'sss',
-            last_name: 'ddd',
-            country: 'japan',
-            balance: '*****',
-            invitees: 5,
-          },
-          user_token: '*****',
+          avatar:
+            'https:/test-spec-1.com/avatarImage/ABC123-45ED-678FG.png?image/crop/50x50&params=1',
         },
       };
+      const typedDecoder = new Decoder<TestBodyType>(key);
       const token = generate(body);
 
-      it('Return the correct object containing URL-encoded data', () => {
+      it('returns the correct object containing URL-encoded data', () => {
         const actual = typedDecoder.decodeAndVerify(token);
+
         expect(actual).toEqual(body);
       });
     });
+    
   });
 });
