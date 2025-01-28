@@ -29,3 +29,5 @@ const JWT = {
 };
 
 export default JWT;
+
+export * from '../types';

@@ -1,4 +1,4 @@
-import JWT from '../dist/lib/index';
+import JWT, { Claims, SupportedAlgorithms } from '../dist/lib/index';
 
 type MyData = {
   foo: {
@@ -20,3 +20,6 @@ console.log(bar);
 
 const decodedWithNoType = JWT.decode(encoded, key);
 console.log(decodedWithNoType.body);
+
+console.log('SupportedAlgorithms', SupportedAlgorithms);
+console.log('Claims', Claims);
